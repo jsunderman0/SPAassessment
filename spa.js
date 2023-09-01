@@ -9,41 +9,59 @@ async function fetchData () {
     console.log(json)
     puppies =json.data.players
     console.log(puppies)
-    
+    render()
     
     
 }
 
-
 async function render(){
-    await fetchData()
-    const hash = window.location.hash.slice(1)
+    
+    const hash = window.location.hash.slice(1)*1
     console.log(hash)
 
     const puppiesHtml = puppies.map((puppy) => {
         
-        return `<li> <a href="#${puppy.id}" class="${puppy.id === hash ? 'selected' : ''}"> <h3>Puppy: ${puppy.id}</h3></a> </li>
+        return `<li> <a href="#${puppy.id}" class="${puppy.id} === hash ? 'selected' : '' "> <h3>Puppy: ${puppy.id}</h3></a> </li>
         `
     })
     allPuppies.innerHTML = puppiesHtml.join('')
 
-    let puppySelection = puppies.find((puppy)=>{
-        return puppy.id = hash
-        return puppySelection.push(puppy)
+    const puppy = puppies.find((puppy)=>{
+        return puppy.id === hash
         
     })
     
-    let hashPuppy = [];
-    hashPuppy.push(puppySelection);
-    console.log(hashPuppy)
+    if (puppy){
+        const detailHtml = `Name: ${puppy.name} <br>
+            Breed: ${puppy.breed} <br>
+           <img src ="${puppy.imageUrl}">
+           `;
+
+    selectedPuppy.innerHTML = detailHtml
+
+    console.log(detailHtml)
+    }
+    else {
+        selectedPuppy.innerHTML = ""
+    }
+
+    console.log(puppy)
+
+
+
     
-    selectedPuppyHtml = hashPuppy.map((info) =>{
-        return `Name: ${info.name} <br>
-            Breed: ${info.breed} <br>
-            <img src ="${info.imageUrl}">
-            `
-    })
-    selectedPuppy.innerHTML = selectedPuppyHtml.join('')
+    
+    // let hashPuppy = [];
+    // hashPuppy.push(puppySelection);
+    // console.log(hashPuppy)
+    
+    // selectedPuppyHtml = hashPuppy.map((info) =>{
+    //     return `Name: ${info.name} <br>
+    //         Breed: ${info.breed} <br>
+    //         <img src ="${info.imageUrl}">
+    //         `
+    // })
+    // selectedPuppy.innerHTML = selectedPuppyHtml.join('')
 
     
 
@@ -54,12 +72,10 @@ async function render(){
 
 
 window.addEventListener("hashchange", () => {
-    
     render()
-    
-    
 })
-render()
+
+fetchData()
 
 
 

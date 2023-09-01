@@ -27,3 +27,7 @@ div > li{
 li:hover{
     background-color: green;
 }
+
+.image{
+    border-radius: 50%;
+}
