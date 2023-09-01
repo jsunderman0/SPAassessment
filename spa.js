@@ -1,5 +1,6 @@
 const allPuppies = document.getElementById("allPuppies")
 const selectedPuppy = document.getElementById("selectedPuppy")
+const backToTop = document.querySelector("button")
 
 let puppies= [];
 
@@ -21,7 +22,7 @@ async function render(){
 
     const puppiesHtml = puppies.map((puppy) => {
         
-        return `<li> <a href="#${puppy.id}" class="${puppy.id} === hash ? 'selected' : '' "> <h3>Puppy: ${puppy.id}</h3></a> </li>
+        return `<li> <a href="#${puppy.id}" class="${puppy.id === hash ? 'selected' : ''} "> <h3>Puppy: ${puppy.id}</h3></a> </li>
         `
     })
     allPuppies.innerHTML = puppiesHtml.join('')
@@ -34,7 +35,7 @@ async function render(){
     if (puppy){
         const detailHtml = `Name: ${puppy.name} <br>
             Breed: ${puppy.breed} <br>
-           <img src ="${puppy.imageUrl}">
+           <img src ="${puppy.imageUrl}" class ="image">
            `;
 
     selectedPuppy.innerHTML = detailHtml
@@ -45,35 +46,25 @@ async function render(){
         selectedPuppy.innerHTML = ""
     }
 
+    window.scroll({
+        top:0,
+        left:0,
+        behavior: "smooth"
+    })
+    
+
     console.log(puppy)
-
-
-
-    
-    
-    // let hashPuppy = [];
-    // hashPuppy.push(puppySelection);
-    // console.log(hashPuppy)
-    
-    // selectedPuppyHtml = hashPuppy.map((info) =>{
-    //     return `Name: ${info.name} <br>
-    //         Breed: ${info.breed} <br>
-    //         <img src ="${info.imageUrl}">
-    //         `
-    // })
-    // selectedPuppy.innerHTML = selectedPuppyHtml.join('')
-
-    
-
-    
-    
+ 
 }
-
-
 
 window.addEventListener("hashchange", () => {
     render()
 })
+
+backToTop.addEventListener("click", e => {
+    render()
+})
+
 
 fetchData()
 

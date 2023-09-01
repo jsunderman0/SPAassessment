@@ -30,4 +30,17 @@ li:hover{
 
 .image{
     border-radius: 50%;
+    width: 50vh;
+    height: 50vh;
+    margin: 1rem;
+}
+
+#selectedPuppy{
+    text-align: center;
+}
+
+@media (width:500px){
+    #allPuppies{
+        flex-direction: column;
+    }
 }
