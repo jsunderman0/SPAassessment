@@ -19,3 +19,11 @@ div > li{
     margin: 1rem;
     padding: .5rem;
 }
+
+.selected{
+    background-color: grey;
+}
+
+li:hover{
+    background-color: green;
+}
